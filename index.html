@@ -30,7 +30,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css?v=mobile-bg-stronger-1" />
+    <link rel="stylesheet" href="styles.css?v=desktop-nav-story-1" />
   </head>
   <body>
     <header class="site-header" aria-label="Primary navigation">
@@ -413,6 +413,15 @@
         );
       }
 
+      function getNearestSection() {
+        return snapSections.reduce((nearest, candidate) => {
+          return Math.abs(candidate.offsetTop - window.scrollY) <
+            Math.abs(nearest.offsetTop - window.scrollY)
+            ? candidate
+            : nearest;
+        }, snapSections[0]);
+      }
+
       function settleMobileSnap() {
         if (!mobileSnapQuery.matches || programmaticScroll) return;
 
@@ -420,22 +429,30 @@
         if (!section) return;
 
         const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const sectionIndex = snapSections.indexOf(section);
         const sectionIsScrollable = section.offsetHeight > window.innerHeight + 24;
-        const nearTop = Math.abs(window.scrollY - sectionTop) < 90;
+        const snapThreshold = Math.min(110, window.innerHeight * 0.16);
+        const nearTop = Math.abs(window.scrollY - sectionTop) < snapThreshold;
 
         if (sectionIsScrollable) {
           if (nearTop) {
             scrollToSection(section);
+            return;
+          }
+
+          const finalInternalTop = sectionBottom - window.innerHeight;
+          const passedScrollableEnd =
+            window.scrollY > finalInternalTop + snapThreshold &&
+            sectionIndex < snapSections.length - 1;
+
+          if (passedScrollableEnd) {
+            scrollToSection(snapSections[sectionIndex + 1]);
           }
           return;
         }
 
-        const nearestSection = snapSections.reduce((nearest, candidate) => {
-          return Math.abs(candidate.offsetTop - window.scrollY) <
-            Math.abs(nearest.offsetTop - window.scrollY)
-            ? candidate
-            : nearest;
-        }, snapSections[0]);
+        const nearestSection = getNearestSection();
 
         if (Math.abs(nearestSection.offsetTop - window.scrollY) > 4) {
           scrollToSection(nearestSection);
@@ -443,6 +460,8 @@
       }
 
       function queueMobileSnapSettle() {
+        if (mobileSnapQuery.matches) return;
+
         window.clearTimeout(mobileSnapTimer);
         mobileSnapTimer = window.setTimeout(settleMobileSnap, 90);
       }
@@ -483,6 +502,8 @@
       );
       window.addEventListener("resize", updateScrollCue);
       window.addEventListener("resize", queueMobileSnapSettle);
+      window.addEventListener("touchend", queueMobileSnapSettle, { passive: true });
+      window.addEventListener("orientationchange", queueMobileSnapSettle);
       updateScrollCue();
     </script>
   </body>
