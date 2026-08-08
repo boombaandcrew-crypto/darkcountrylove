@@ -1274,8 +1274,7 @@ h3 {
     align-items: end;
     height: 100dvh;
     min-height: 100dvh;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     padding: 45svh 16px 42px;
   }
 
