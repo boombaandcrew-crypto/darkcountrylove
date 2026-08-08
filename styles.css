@@ -1186,14 +1186,20 @@ h3 {
 
   html {
     scroll-padding-top: 0;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
+  }
+
+  main {
+    overflow-x: clip;
   }
 
   .snap-section {
-    height: 100dvh;
+    height: auto;
     min-height: 100dvh;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: visible;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
   }
 
