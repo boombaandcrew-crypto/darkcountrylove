@@ -30,7 +30,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css?v=mobile-scroll-flow-2" />
+    <link rel="stylesheet" href="styles.css?v=mobile-snap-zone-1" />
   </head>
   <body>
     <header class="site-header" aria-label="Primary navigation">
@@ -408,7 +408,7 @@
 
         const scrollTop = window.scrollY;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const snapThreshold = Math.min(280, window.innerHeight * 0.3);
+        const snapThreshold = Math.min(640, window.innerHeight * 0.65);
 
         if (scrollTop <= 2 || maxScroll - scrollTop <= 2) return;
 
@@ -431,7 +431,7 @@
         if (!mobileSnapQuery.matches || programmaticScroll) return;
 
         window.clearTimeout(mobileSnapTimer);
-        mobileSnapTimer = window.setTimeout(settleMobileSnap, 150);
+        mobileSnapTimer = window.setTimeout(settleMobileSnap, 110);
       }
 
       scrollCue.addEventListener("click", () => {
