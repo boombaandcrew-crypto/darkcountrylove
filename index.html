@@ -15,32 +15,33 @@
     />
     <meta property="og:url" content="https://darkcountrylove.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://darkcountrylove.com/assets/hero-poster.jpg" />
+    <meta property="og:image" content="https://darkcountrylove.com/assets/landing-wide-natural.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dark Country Love" />
     <meta
       name="twitter:description"
       content="Listen to Dark Country Love on Spotify, YouTube Music, and Apple Music."
     />
-    <meta name="twitter:image" content="https://darkcountrylove.com/assets/hero-poster.jpg" />
+    <meta name="twitter:image" content="https://darkcountrylove.com/assets/landing-wide-natural.png" />
     <meta name="theme-color" content="#100b09" />
-    <link rel="preload" href="assets/hero-poster.jpg" as="image" />
+    <link rel="preload" href="assets/landing-wide-natural.png" as="image" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=section-bg-4" />
   </head>
   <body>
     <header class="site-header" aria-label="Primary navigation">
       <a class="brand-mark" href="#top" aria-label="Dark Country Love home">
-        <span>DCL</span>
+        <img src="assets/dark-country-love-logo-cropped.png" alt="Dark Country Love" />
       </a>
       <nav class="site-nav">
+        <a href="#top"><i class="fa-solid fa-house" aria-hidden="true"></i>Landing</a>
+        <a href="#release"><i class="fa-solid fa-compact-disc" aria-hidden="true"></i>Release</a>
         <a href="#music"><i class="fa-solid fa-music" aria-hidden="true"></i>Music</a>
         <a href="#story"><i class="fa-solid fa-book-open" aria-hidden="true"></i>Story</a>
-        <a href="#follow"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Follow</a>
         <span class="nav-divider" aria-hidden="true"></span>
         <a
           class="nav-social facebook"
@@ -73,12 +74,13 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
+      <section class="hero snap-section" aria-labelledby="hero-title">
         <div class="hero-media" aria-hidden="true"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <p class="eyebrow">Born where the quiet gets heavy</p>
-          <h1 id="hero-title">Dark Country Love</h1>
+          <p class="eyebrow">Listen and follow</p>
+          <p class="poster-script">Your support keeps the music alive</p>
+          <h1 id="hero-title">Dark Country <span>Love</span></h1>
           <p class="hero-copy">
             Haunting country songs for grief, loneliness, and the kind of love
             that keeps breathing after the room goes still.
@@ -136,76 +138,88 @@
         </button>
       </section>
 
-      <section class="release-section" id="music" aria-labelledby="release-title">
-        <div class="section-copy">
-          <p class="eyebrow">Featured Release</p>
-          <h2 id="release-title">Carry Me When I Can't Stand</h2>
-          <p>
-            A song for the people holding themselves together in daylight and
-            falling apart when nobody is looking.
-          </p>
-          <div class="release-platforms" aria-label="Listen to the featured release">
-            <a
-              class="release-platform spotify"
-              href="https://open.spotify.com/album/2HXJDTEAwO67SDaCxNwWrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Listen to Carry Me When I Can't Stand on Spotify"
-            >
-              <i class="fa-brands fa-spotify" aria-hidden="true"></i>
-              Spotify
-            </a>
-            <a
-              class="release-platform youtube"
-              href="https://music.youtube.com/@darkcountryloveofficial?si=BKmzCbQlw4bOp9Lq"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Play Dark Country Love on YouTube Music"
-            >
-              <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-              YouTube Music
-            </a>
-            <a
-              class="release-platform apple"
-              href="https://music.apple.com/us/album/carry-me-when-i-cant-stand-single/6792970401"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Listen to Carry Me When I Can't Stand on Apple Music"
-            >
-              <i class="fa-brands fa-apple" aria-hidden="true"></i>
-              Apple Music
-            </a>
-          </div>
+      <section class="release-section snap-section" id="release" aria-labelledby="release-title">
+        <div class="section-bg-slider" aria-hidden="true">
+          <span style="--bg-image: url('assets/section-bg-fence.png')"></span>
+          <span style="--bg-image: url('assets/section-bg-portrait.png')"></span>
+          <span style="--bg-image: url('assets/section-bg-sunset.png')"></span>
         </div>
-        <div class="cover-stack" aria-label="Dark Country Love cover artwork">
-          <article class="release-card featured-cover" aria-label="Carry Me When I Can't Stand release card">
-            <div class="release-art">
-              <img src="assets/rain-cover.jpg" alt="Rain-soaked Dark Country Love cover artwork" />
+        <div class="music-feature">
+          <div class="section-copy">
+            <p class="eyebrow">Featured Release</p>
+            <h2 id="release-title">Carry Me When I Can't Stand</h2>
+            <p>
+              A song for the people holding themselves together in daylight and
+              falling apart when nobody is looking.
+            </p>
+            <div class="release-platforms" aria-label="Listen to the featured release">
+              <a
+                class="release-platform spotify"
+                href="https://open.spotify.com/album/2HXJDTEAwO67SDaCxNwWrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Listen to Carry Me When I Can't Stand on Spotify"
+              >
+                <i class="fa-brands fa-spotify" aria-hidden="true"></i>
+                Spotify
+              </a>
+              <a
+                class="release-platform youtube"
+                href="https://music.youtube.com/@darkcountryloveofficial?si=BKmzCbQlw4bOp9Lq"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Play Dark Country Love on YouTube Music"
+              >
+                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                YouTube Music
+              </a>
+              <a
+                class="release-platform apple"
+                href="https://music.apple.com/us/album/carry-me-when-i-cant-stand-single/6792970401"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Listen to Carry Me When I Can't Stand on Apple Music"
+              >
+                <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                Apple Music
+              </a>
             </div>
-            <div class="release-meta">
-              <span>Single</span>
-              <strong>Carry Me When I Can't Stand</strong>
-            </div>
-          </article>
-          <article class="release-card side-cover" aria-label="Dark Country Love artist cover">
-            <div class="release-art">
-              <img src="assets/night-cover.jpg" alt="Dark Country Love night portrait cover artwork" />
-            </div>
-            <div class="release-meta">
-              <span>Artist</span>
-              <strong>Dark Country Love</strong>
-            </div>
-          </article>
+          </div>
+          <div class="cover-stack" aria-label="Dark Country Love cover artwork">
+            <article class="release-card featured-cover" aria-label="Carry Me When I Can't Stand release card">
+              <div class="release-art">
+                <img src="assets/rain-cover.jpg" alt="Rain-soaked Dark Country Love cover artwork" />
+              </div>
+              <div class="release-meta">
+                <span>Single</span>
+                <strong>Carry Me When I Can't Stand</strong>
+              </div>
+            </article>
+            <article class="release-card side-cover" aria-label="Dark Country Love artist cover">
+              <div class="release-art">
+                <img src="assets/night-cover.jpg" alt="Dark Country Love night portrait cover artwork" />
+              </div>
+              <div class="release-meta">
+                <span>Artist</span>
+                <strong>Dark Country Love</strong>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="tracks-section" aria-labelledby="tracks-title">
-        <div class="section-heading">
-          <p class="eyebrow">Dark Country Love</p>
-          <h2 id="tracks-title">Standout Tracks</h2>
-          <p>The songs built for late nights, long drives, and names you still say quietly.</p>
-        </div>
-        <ol class="track-list">
+      <section class="tracks-section snap-section" id="music" aria-labelledby="tracks-title">
+          <div class="section-bg-slider" aria-hidden="true">
+            <span style="--bg-image: url('assets/section-bg-sunset.png')"></span>
+            <span style="--bg-image: url('assets/section-bg-mirror.png')"></span>
+            <span style="--bg-image: url('assets/section-bg-fence.png')"></span>
+          </div>
+          <div class="section-heading">
+            <p class="eyebrow">Dark Country Love</p>
+            <h2 id="tracks-title">Standout Tracks</h2>
+            <p>The songs built for late nights, long drives, and names you still say quietly.</p>
+          </div>
+          <ol class="track-list">
           <li>
             <div class="track-row">
               <span class="track-info">
@@ -270,59 +284,75 @@
               </span>
             </div>
           </li>
-        </ol>
+          <li>
+            <div class="track-row">
+              <span class="track-info">
+                <span class="track-title-line">
+                  <span class="track-number">05</span>
+                  <h3>Empty Porch Swing</h3>
+                </span>
+                <p>For the quiet places that still wait for someone.</p>
+              </span>
+              <span class="track-actions" aria-label="Listen to Empty Porch Swing">
+                <a class="track-platform spotify" href="https://open.spotify.com/search/Dark%20Country%20Love%20Empty%20Porch%20Swing" target="_blank" rel="noopener noreferrer" aria-label="Find Empty Porch Swing on Spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></a>
+                <a class="track-platform youtube" href="https://music.youtube.com/search?q=Dark%20Country%20Love%20Empty%20Porch%20Swing" target="_blank" rel="noopener noreferrer" aria-label="Find Empty Porch Swing on YouTube Music"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                <a class="track-platform apple" href="https://music.apple.com/us/search?term=Dark%20Country%20Love%20Empty%20Porch%20Swing" target="_blank" rel="noopener noreferrer" aria-label="Find Empty Porch Swing on Apple Music"><i class="fa-brands fa-apple" aria-hidden="true"></i></a>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="track-row">
+              <span class="track-info">
+                <span class="track-title-line">
+                  <span class="track-number">06</span>
+                  <h3>Empty Side of Bed</h3>
+                </span>
+                <p>For the mornings that remember what the night took.</p>
+              </span>
+              <span class="track-actions" aria-label="Listen to Empty Side of Bed">
+                <a class="track-platform spotify" href="https://open.spotify.com/search/Dark%20Country%20Love%20Empty%20Side%20of%20Bed" target="_blank" rel="noopener noreferrer" aria-label="Find Empty Side of Bed on Spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></a>
+                <a class="track-platform youtube" href="https://music.youtube.com/search?q=Dark%20Country%20Love%20Empty%20Side%20of%20Bed" target="_blank" rel="noopener noreferrer" aria-label="Find Empty Side of Bed on YouTube Music"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+                <a class="track-platform apple" href="https://music.apple.com/us/search?term=Dark%20Country%20Love%20Empty%20Side%20of%20Bed" target="_blank" rel="noopener noreferrer" aria-label="Find Empty Side of Bed on Apple Music"><i class="fa-brands fa-apple" aria-hidden="true"></i></a>
+              </span>
+            </div>
+          </li>
+          </ol>
       </section>
 
-      <section class="story-section" id="story" aria-labelledby="story-title">
+      <section class="story-section snap-section" id="story" aria-labelledby="story-title">
+        <div class="section-bg-slider" aria-hidden="true">
+          <span style="--bg-image: url('assets/section-bg-chapel.png')"></span>
+          <span style="--bg-image: url('assets/section-bg-mirror.png')"></span>
+          <span style="--bg-image: url('assets/section-bg-portrait.png')"></span>
+        </div>
         <div class="story-panel">
           <p class="eyebrow">The Story</p>
           <h2 id="story-title">Songs for what the night remembers</h2>
           <p>
-            Dark Country Love lives in the space between heartbreak and prayer:
-            raw country textures, shadowed melodies, and words for people still
-            carrying someone after the noise is gone.
+            <strong>Dark Country Love</strong> was born where love, loss, faith,
+            and the open road collide. It tells the stories of people who loved
+            hard, lost deeply, and kept moving even when part of them stayed
+            behind.
+          </p>
+          <p>
+            Built around dark country, Southern rock, and cinematic storytelling,
+            every song feels like a page torn from someone's life: hospital rooms
+            at midnight, empty passenger seats, worn wedding rings, muddy
+            backroads, unanswered prayers, and memories that refuse to disappear.
+          </p>
+          <p>
+            The bull skull represents strength after loss: weathered, scarred,
+            but still standing.
+          </p>
+          <p>
+            <strong>Dark Country Love isn't just country music.</strong> It's
+            music for the things we never got to say, the people we'll never stop
+            loving, and the stories that stay with us long after the last note
+            fades.
           </p>
         </div>
       </section>
 
-      <section class="follow-section" id="follow" aria-labelledby="follow-title">
-        <div>
-          <p class="eyebrow">Stay in the loop</p>
-          <h2 id="follow-title">New songs, new nights</h2>
-        </div>
-        <div class="social-links social-menu" aria-label="Follow Dark Country Love">
-          <a
-            class="social-link facebook"
-            href="https://www.facebook.com/profile.php?id=100078061854185"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow Dark Country Love on Facebook"
-          >
-            <span><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span>
-            <strong>Facebook</strong>
-          </a>
-          <a
-            class="social-link instagram"
-            href="https://www.instagram.com/dark.country.love/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow Dark Country Love on Instagram"
-          >
-            <span><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
-            <strong>Instagram</strong>
-          </a>
-          <a
-            class="social-link tiktok"
-            href="https://www.tiktok.com/@dark.country.love"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow Dark Country Love on TikTok"
-          >
-            <span><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
-            <strong>TikTok</strong>
-          </a>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -342,17 +372,46 @@
     </footer>
     <script>
       const scrollCue = document.querySelector(".scroll-cue");
+      const snapSections = [...document.querySelectorAll(".snap-section")];
+
+      function getCurrentSnapIndex() {
+        return snapSections.reduce((activeIndex, section, index) => {
+          return window.scrollY + window.innerHeight * 0.35 >= section.offsetTop
+            ? index
+            : activeIndex;
+        }, 0);
+      }
 
       function updateScrollCue() {
-        const distanceFromBottom =
-          document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
-        scrollCue.classList.toggle("is-hidden", distanceFromBottom < 24);
+        scrollCue.classList.toggle(
+          "is-hidden",
+          getCurrentSnapIndex() >= snapSections.length - 1
+        );
       }
 
       scrollCue.addEventListener("click", () => {
-        window.scrollBy({
-          top: Math.round(window.innerHeight * 0.86),
-          behavior: "smooth",
+        const currentIndex = getCurrentSnapIndex();
+        const nextSection = snapSections[Math.min(currentIndex + 1, snapSections.length - 1)];
+
+        if (nextSection && nextSection.offsetTop > window.scrollY + 8) {
+          window.scrollTo({ top: nextSection.offsetTop, behavior: "smooth" });
+        } else {
+          window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+        }
+      });
+
+      document.querySelectorAll('.site-nav a[href^="#"], .brand-mark').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const targetId = link.getAttribute("href");
+          const target =
+            targetId === "#top"
+              ? document.querySelector(".hero")
+              : document.querySelector(targetId);
+
+          if (!target) return;
+
+          event.preventDefault();
+          window.scrollTo({ top: target.offsetTop, behavior: "smooth" });
         });
       });
 
