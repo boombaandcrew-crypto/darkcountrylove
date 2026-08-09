@@ -1,19 +1,28 @@
 # Dark Country Love Landing Page
 
-Responsive artist landing page for Dark Country Love, built as a static site for simple Vercel deployment.
+Modern artist landing page for Dark Country Love — a clean, dark, editorial-style static site ready for Vercel.
+
+## Design notes
+
+- Contemporary typography (Instrument Serif + Inter)
+- Minimal chrome, strong hierarchy, refined gold accents
+- Sticky glass header, mobile menu, scroll reveals
+- Same streaming + social links and image asset paths as before
 
 ## Local Preview
 
 Open `index.html` directly in a browser, or run a tiny local server:
 
-```powershell
+```bash
 npx serve .
 ```
+
+Place the `assets/` folder next to `index.html` (same structure as the original project).
 
 ## Production Deploy With Vercel
 
 1. Create a new GitHub repository for this folder.
-2. Push the contents of `dark-country-love-landing` to that repository.
+2. Push the contents (including `assets/`) to that repository.
 3. In Vercel, choose **Add New Project** and import the GitHub repository.
 4. Keep the default static-site settings. No build command is required.
 5. Deploy and test the generated Vercel URL.
