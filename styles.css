@@ -1186,7 +1186,7 @@ h3 {
   }
 
   html {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
   }
 
   main {
@@ -1194,10 +1194,11 @@ h3 {
   }
 
   .snap-section {
-    height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    -webkit-overflow-scrolling: touch;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 
   .section-bg-slider span {

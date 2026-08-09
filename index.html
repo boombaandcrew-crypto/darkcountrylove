@@ -429,6 +429,72 @@
       window.addEventListener("resize", updateScrollCue);
       window.addEventListener("orientationchange", updateScrollCue);
       updateScrollCue();
+
+      // --- Mobile section-snap assist ---
+      // iOS Safari does not reliably hand a touch gesture off from a
+      // scrolled-to-its-limit inner section to the next section in one
+      // continuous swipe, and forcing CSS scroll-snap on fixed-height
+      // sections fights with the address-bar-driven viewport resizing.
+      // Instead we let mobile scroll natively (no CSS snap at all) and,
+      // once a scroll gesture has fully settled, nudge the page to the
+      // nearest section boundary only if that boundary is already close by.
+      // Deep in the middle of a long section, nothing is touched.
+      const mobileQuery = window.matchMedia("(max-width: 900px)");
+      const SNAP_THRESHOLD_RATIO = 0.35;
+      let gestureStartIndex = getCurrentSnapIndex();
+      let snapAssistTimer = null;
+
+      function findNearbyBoundary(scrollY, viewportHeight) {
+        let best = null;
+        snapSections.forEach((section, index) => {
+          const distance = Math.abs(section.offsetTop - scrollY);
+          if (distance <= viewportHeight * SNAP_THRESHOLD_RATIO) {
+            if (!best || distance < best.distance) {
+              best = { index, distance };
+            }
+          }
+        });
+        return best;
+      }
+
+      function runSnapAssist() {
+        if (!mobileQuery.matches) return;
+
+        const viewportHeight = window.innerHeight;
+        const nearby = findNearbyBoundary(window.scrollY, viewportHeight);
+        if (!nearby) return;
+
+        const clampedIndex = Math.max(
+          gestureStartIndex - 1,
+          Math.min(gestureStartIndex + 1, nearby.index)
+        );
+        const target = snapSections[clampedIndex];
+
+        if (target && Math.abs(target.offsetTop - window.scrollY) > 2) {
+          scrollToSection(target);
+        }
+      }
+
+      window.addEventListener(
+        "touchstart",
+        () => {
+          gestureStartIndex = getCurrentSnapIndex();
+        },
+        { passive: true }
+      );
+
+      if ("onscrollend" in window) {
+        window.addEventListener("scrollend", runSnapAssist);
+      } else {
+        window.addEventListener(
+          "scroll",
+          () => {
+            clearTimeout(snapAssistTimer);
+            snapAssistTimer = setTimeout(runSnapAssist, 120);
+          },
+          { passive: true }
+        );
+      }
     </script>
   </body>
 </html>
