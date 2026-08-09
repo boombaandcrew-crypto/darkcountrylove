@@ -373,10 +373,11 @@
       const scrollCue = document.querySelector(".scroll-cue");
       const snapSections = [...document.querySelectorAll(".snap-section")];
       const mobileSnapQuery = window.matchMedia("(max-width: 900px)");
-      let mobileSnapTimer;
       let programmaticScroll = false;
-      let lastScrollY = window.scrollY;
-      let mobileScrollDirection = 0;
+      let touchStartY = 0;
+      let touchStartX = 0;
+      let touchStartScrollY = 0;
+      let touchStartTime = 0;
 
       function getCurrentSnapIndex() {
         return snapSections.reduce((activeIndex, section, index) => {
@@ -403,35 +404,67 @@
         }, 900);
       }
 
-      function settleMobileSnap() {
-        if (!mobileSnapQuery.matches || programmaticScroll || !mobileScrollDirection) return;
-
-        const scrollTop = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const snapThreshold = Math.min(640, window.innerHeight * 0.65);
-
-        if (scrollTop <= 2 || maxScroll - scrollTop <= 2) return;
-
-        const target =
-          mobileScrollDirection > 0
-            ? snapSections.find((section) => section.offsetTop > scrollTop + 4)
-            : [...snapSections]
-                .reverse()
-                .find((section) => section.offsetTop < scrollTop - 4);
-
-        if (!target) return;
-
-        const distance = Math.abs(target.offsetTop - scrollTop);
-        if (distance <= snapThreshold) {
-          scrollToSection(target);
-        }
+      function getViewportHeight() {
+        return window.visualViewport?.height || window.innerHeight;
       }
 
-      function queueMobileSnapSettle() {
+      function getSnapIndexAt(scrollPosition) {
+        const viewportHeight = getViewportHeight();
+
+        return snapSections.reduce((activeIndex, section, index) => {
+          return scrollPosition + viewportHeight * 0.42 >= section.offsetTop
+            ? index
+            : activeIndex;
+        }, 0);
+      }
+
+      function handleMobileSwipe(event) {
         if (!mobileSnapQuery.matches || programmaticScroll) return;
 
-        window.clearTimeout(mobileSnapTimer);
-        mobileSnapTimer = window.setTimeout(settleMobileSnap, 110);
+        const touch = event.changedTouches?.[0];
+        if (!touch) return;
+
+        const deltaY = touchStartY - touch.clientY;
+        const deltaX = touchStartX - touch.clientX;
+        const elapsed = Math.max(1, Date.now() - touchStartTime);
+        const viewportHeight = getViewportHeight();
+        const minSwipe = Math.min(92, Math.max(46, viewportHeight * 0.075));
+        const velocity = Math.abs(deltaY) / elapsed;
+        const deliberateSwipe = Math.abs(deltaY) >= minSwipe * 1.5 || velocity >= 0.08;
+
+        if (
+          !deliberateSwipe ||
+          Math.abs(deltaY) < Math.abs(deltaX) * 1.25 ||
+          Math.abs(deltaY) < minSwipe
+        ) {
+          return;
+        }
+
+        const direction = deltaY > 0 ? 1 : -1;
+        const currentIndex = getSnapIndexAt(touchStartScrollY);
+        const currentSection = snapSections[currentIndex];
+        const targetIndex = currentIndex + direction;
+        const target = snapSections[targetIndex];
+
+        if (!currentSection || !target) return;
+
+        const sectionTop = currentSection.offsetTop;
+        const sectionBottom = sectionTop + currentSection.offsetHeight;
+        const sectionNeedsScroll = currentSection.offsetHeight > viewportHeight + 24;
+        const edgeTolerance = Math.min(260, Math.max(150, viewportHeight * 0.3));
+        const currentScrollY = window.scrollY;
+
+        if (sectionNeedsScroll) {
+          const atBottomEdge =
+            currentScrollY + viewportHeight >= sectionBottom - edgeTolerance;
+          const atTopEdge = currentScrollY <= sectionTop + edgeTolerance;
+
+          if ((direction > 0 && !atBottomEdge) || (direction < 0 && !atTopEdge)) {
+            return;
+          }
+        }
+
+        scrollToSection(target);
       }
 
       scrollCue.addEventListener("click", () => {
@@ -463,30 +496,26 @@
       window.addEventListener(
         "scroll",
         () => {
-          const currentScrollY = window.scrollY;
-          const delta = currentScrollY - lastScrollY;
-
-          if (Math.abs(delta) > 1 && !programmaticScroll) {
-            mobileScrollDirection = Math.sign(delta);
-          }
-          lastScrollY = currentScrollY;
-
           updateScrollCue();
-          queueMobileSnapSettle();
         },
         { passive: true }
       );
       window.addEventListener("resize", updateScrollCue);
       window.addEventListener(
         "touchstart",
-        () => window.clearTimeout(mobileSnapTimer),
+        (event) => {
+          const touch = event.changedTouches?.[0];
+          if (!touch) return;
+
+          touchStartY = touch.clientY;
+          touchStartX = touch.clientX;
+          touchStartScrollY = window.scrollY;
+          touchStartTime = Date.now();
+        },
         { passive: true }
       );
-      window.addEventListener("touchend", queueMobileSnapSettle, { passive: true });
-      window.addEventListener("orientationchange", () => {
-        window.clearTimeout(mobileSnapTimer);
-        lastScrollY = window.scrollY;
-      });
+      window.addEventListener("touchend", handleMobileSwipe, { passive: true });
+      window.addEventListener("orientationchange", updateScrollCue);
       updateScrollCue();
     </script>
   </body>
