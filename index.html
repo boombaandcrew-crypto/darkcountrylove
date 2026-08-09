@@ -30,7 +30,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css?v=iphone-poster-match-1" />
+    <link rel="stylesheet" href="styles.css?v=mobile-touchmove-snap-1" />
   </head>
   <body>
     <header class="site-header" aria-label="Primary navigation">
@@ -378,6 +378,7 @@
       let touchStartX = 0;
       let touchStartScrollY = 0;
       let touchStartTime = 0;
+      let mobileSwipeTriggered = false;
 
       function getCurrentSnapIndex() {
         return snapSections.reduce((activeIndex, section, index) => {
@@ -419,9 +420,9 @@
       }
 
       function handleMobileSwipe(event) {
-        if (!mobileSnapQuery.matches || programmaticScroll) return;
+        if (!mobileSnapQuery.matches || programmaticScroll || mobileSwipeTriggered) return;
 
-        const touch = event.changedTouches?.[0];
+        const touch = event.touches?.[0] || event.changedTouches?.[0];
         if (!touch) return;
 
         const deltaY = touchStartY - touch.clientY;
@@ -464,6 +465,10 @@
           }
         }
 
+        mobileSwipeTriggered = true;
+        if (event.cancelable) {
+          event.preventDefault();
+        }
         scrollToSection(target);
       }
 
@@ -511,10 +516,14 @@
           touchStartX = touch.clientX;
           touchStartScrollY = window.scrollY;
           touchStartTime = Date.now();
+          mobileSwipeTriggered = false;
         },
         { passive: true }
       );
-      window.addEventListener("touchend", handleMobileSwipe, { passive: true });
+      window.addEventListener("touchmove", handleMobileSwipe, { passive: false });
+      window.addEventListener("touchcancel", () => {
+        mobileSwipeTriggered = false;
+      });
       window.addEventListener("orientationchange", updateScrollCue);
       updateScrollCue();
     </script>
