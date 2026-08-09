@@ -30,7 +30,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css?v=mobile-touchmove-snap-1" />
+    <link rel="stylesheet" href="styles.css?v=iphone17-compact-poster-1" />
   </head>
   <body>
     <header class="site-header" aria-label="Primary navigation">
@@ -372,13 +372,6 @@
     <script>
       const scrollCue = document.querySelector(".scroll-cue");
       const snapSections = [...document.querySelectorAll(".snap-section")];
-      const mobileSnapQuery = window.matchMedia("(max-width: 900px)");
-      let programmaticScroll = false;
-      let touchStartY = 0;
-      let touchStartX = 0;
-      let touchStartScrollY = 0;
-      let touchStartTime = 0;
-      let mobileSwipeTriggered = false;
 
       function getCurrentSnapIndex() {
         return snapSections.reduce((activeIndex, section, index) => {
@@ -397,79 +390,7 @@
 
       function scrollToSection(section) {
         if (!section) return;
-
-        programmaticScroll = true;
         window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
-        window.setTimeout(() => {
-          programmaticScroll = false;
-        }, 900);
-      }
-
-      function getViewportHeight() {
-        return window.visualViewport?.height || window.innerHeight;
-      }
-
-      function getSnapIndexAt(scrollPosition) {
-        const viewportHeight = getViewportHeight();
-
-        return snapSections.reduce((activeIndex, section, index) => {
-          return scrollPosition + viewportHeight * 0.42 >= section.offsetTop
-            ? index
-            : activeIndex;
-        }, 0);
-      }
-
-      function handleMobileSwipe(event) {
-        if (!mobileSnapQuery.matches || programmaticScroll || mobileSwipeTriggered) return;
-
-        const touch = event.touches?.[0] || event.changedTouches?.[0];
-        if (!touch) return;
-
-        const deltaY = touchStartY - touch.clientY;
-        const deltaX = touchStartX - touch.clientX;
-        const elapsed = Math.max(1, Date.now() - touchStartTime);
-        const viewportHeight = getViewportHeight();
-        const minSwipe = Math.min(92, Math.max(46, viewportHeight * 0.075));
-        const velocity = Math.abs(deltaY) / elapsed;
-        const deliberateSwipe = Math.abs(deltaY) >= minSwipe * 1.5 || velocity >= 0.08;
-
-        if (
-          !deliberateSwipe ||
-          Math.abs(deltaY) < Math.abs(deltaX) * 1.25 ||
-          Math.abs(deltaY) < minSwipe
-        ) {
-          return;
-        }
-
-        const direction = deltaY > 0 ? 1 : -1;
-        const currentIndex = getSnapIndexAt(touchStartScrollY);
-        const currentSection = snapSections[currentIndex];
-        const targetIndex = currentIndex + direction;
-        const target = snapSections[targetIndex];
-
-        if (!currentSection || !target) return;
-
-        const sectionTop = currentSection.offsetTop;
-        const sectionBottom = sectionTop + currentSection.offsetHeight;
-        const sectionNeedsScroll = currentSection.offsetHeight > viewportHeight + 24;
-        const edgeTolerance = Math.min(260, Math.max(150, viewportHeight * 0.3));
-        const currentScrollY = window.scrollY;
-
-        if (sectionNeedsScroll) {
-          const atBottomEdge =
-            currentScrollY + viewportHeight >= sectionBottom - edgeTolerance;
-          const atTopEdge = currentScrollY <= sectionTop + edgeTolerance;
-
-          if ((direction > 0 && !atBottomEdge) || (direction < 0 && !atTopEdge)) {
-            return;
-          }
-        }
-
-        mobileSwipeTriggered = true;
-        if (event.cancelable) {
-          event.preventDefault();
-        }
-        scrollToSection(target);
       }
 
       scrollCue.addEventListener("click", () => {
@@ -506,24 +427,6 @@
         { passive: true }
       );
       window.addEventListener("resize", updateScrollCue);
-      window.addEventListener(
-        "touchstart",
-        (event) => {
-          const touch = event.changedTouches?.[0];
-          if (!touch) return;
-
-          touchStartY = touch.clientY;
-          touchStartX = touch.clientX;
-          touchStartScrollY = window.scrollY;
-          touchStartTime = Date.now();
-          mobileSwipeTriggered = false;
-        },
-        { passive: true }
-      );
-      window.addEventListener("touchmove", handleMobileSwipe, { passive: false });
-      window.addEventListener("touchcancel", () => {
-        mobileSwipeTriggered = false;
-      });
       window.addEventListener("orientationchange", updateScrollCue);
       updateScrollCue();
     </script>
