@@ -939,7 +939,9 @@ body.nav-open .menu-toggle span:last-child {
   .hero {
     align-items: flex-end;
     min-height: 100svh;
-    padding: calc(var(--header-h) + 24px) 20px 56px;
+    /* Push copy into the lower band so the face stays clear */
+    padding: 0 20px max(28px, env(safe-area-inset-bottom));
+    padding-top: 48svh;
   }
 
   .hero-image {
@@ -950,20 +952,45 @@ body.nav-open .menu-toggle span:last-child {
 
   .hero-gradient {
     background:
-      linear-gradient(180deg, rgba(10, 8, 6, 0.25) 0%, rgba(10, 8, 6, 0.1) 30%, rgba(10, 8, 6, 0.85) 65%, rgba(10, 8, 6, 0.98) 100%);
+      linear-gradient(
+        180deg,
+        rgba(10, 8, 6, 0.15) 0%,
+        rgba(10, 8, 6, 0.05) 28%,
+        rgba(10, 8, 6, 0.45) 48%,
+        rgba(10, 8, 6, 0.88) 62%,
+        rgba(10, 8, 6, 0.98) 78%,
+        #0a0806 100%
+      );
+  }
+
+  .hero-inner {
+    padding-bottom: 8px;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 8px;
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 12vw, 4rem);
+    font-size: clamp(2.6rem, 11vw, 3.6rem);
+    margin-bottom: 12px;
+  }
+
+  .hero-lead {
+    margin-bottom: 20px;
+    font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+    line-height: 1.45;
   }
 
   .hero-ctas {
     flex-direction: column;
+    gap: 10px;
   }
 
   .hero-ctas .btn {
     justify-content: center;
     width: 100%;
+    min-height: 46px;
   }
 
   .scroll-hint {
