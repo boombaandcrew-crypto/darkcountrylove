@@ -592,10 +592,15 @@ body.nav-open .menu-toggle span:last-child {
   background: var(--bg-card);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+  color: inherit;
+  display: block;
+  text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cover-card:hover {
+.cover-card:hover,
+.cover-card:focus-visible {
+  border-color: var(--gold);
   transform: translateY(-4px);
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
 }
@@ -675,16 +680,25 @@ body.nav-open .menu-toggle span:last-child {
 }
 
 .track {
+  color: inherit;
   display: grid;
   grid-template-columns: 48px 1fr auto;
   gap: 20px;
   align-items: center;
   padding: 22px 8px;
-  transition: background 0.2s ease;
+  text-decoration: none;
+  transition: background 0.2s ease, padding-inline 0.2s ease;
 }
 
-.track:hover {
+.track:hover,
+.track:focus-visible {
   background: rgba(255, 255, 255, 0.03);
+  padding-inline: 14px;
+}
+
+.track:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: -1px;
 }
 
 .track-num {
@@ -737,8 +751,8 @@ body.nav-open .menu-toggle span:last-child {
   color: var(--apple);
 }
 
-.track-btn.spotify:hover,
-.track-btn.spotify:focus-visible {
+.track:hover .track-btn.spotify,
+.track:focus-visible .track-btn.spotify {
   background: var(--spotify);
   border-color: var(--spotify);
   color: #0a0806;
