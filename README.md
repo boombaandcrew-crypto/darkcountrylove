@@ -8,6 +8,7 @@ Modern artist landing page for Dark Country Love — a clean, dark, editorial-st
 - Minimal chrome, strong hierarchy, refined gold accents
 - Sticky glass header, mobile menu, scroll reveals
 - Same streaming + social links and image asset paths as before
+- Vercel Web Analytics support after deployment
 
 ## Local Preview
 
@@ -26,6 +27,13 @@ Place the `assets/` folder next to `index.html` (same structure as the original 
 3. In Vercel, choose **Add New Project** and import the GitHub repository.
 4. Keep the default static-site settings. No build command is required.
 5. Deploy and test the generated Vercel URL.
+6. In the Vercel project dashboard, enable **Web Analytics**.
+7. Visit the production site and wait for page views to appear in Vercel Analytics.
+
+## Visitor Analytics
+
+This static site includes Vercel Web Analytics via `/_vercel/insights/script.js`.
+It will not collect visits from `localhost`; it starts collecting after the site is deployed on Vercel and Web Analytics is enabled for the project.
 
 ## Custom Domain With Cloudflare
 
