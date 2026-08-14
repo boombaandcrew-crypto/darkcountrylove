@@ -42,12 +42,18 @@ It will not collect visits from `localhost`; it starts collecting after the site
 3. In Vercel, open the project and add these domains:
    - `darkcountrylove.com`
    - `www.darkcountrylove.com`
-4. Copy the DNS records Vercel gives you.
-5. In Cloudflare DNS, add those records exactly.
+4. In Cloudflare DNS, use these Vercel records:
+   - `A` record for `@` -> `76.76.21.21`
+   - `CNAME` record for `www` -> `cname.vercel-dns.com`
+5. Remove old/conflicting `A` records for `@` or `www`, especially records pointing to non-Vercel IPs.
 6. Wait for Vercel to show HTTPS as active.
 7. Test both final URLs:
    - `https://darkcountrylove.com`
    - `https://www.darkcountrylove.com`
+
+## Redeploy Note
+
+Updated deployment docs for the custom domain DNS records. Push this README change to trigger a fresh Vercel deployment after DNS is corrected.
 
 ## Current Streaming Links
 
